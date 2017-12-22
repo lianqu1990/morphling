@@ -1,0 +1,61 @@
+<div class="container w-full w-auto-xs font-chinese" ng-controller="SigninFormController" ng-init="app.settings.container = false;">
+    <a href class="navbar-brand block m-t" ui-sref="app.home">{{app.name}}</a>
+    <div class="row clearfix m-t-md">
+        <div class="col-md-4 column"></div>
+        <div class="col-md-4 column">
+            <div class="row clearfix">
+                <div class="col-md-12 column">
+                    <form class="form-horizontal form-validation" role="form" name="form">
+                        <div class="form-group" ng-class="{true:'has-error',false:''}[form.username.$dirty && form.username.$invalid]">
+                            <div class="col-lg-12 ">
+                                <input name="phone" type="text" class="form-control" placeholder="请输入您的ID或者手机号" ng-model="user.username" ng-pattern="/^\w+$/" required />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-12 ">
+                                <input name="password" type="password" class="form-control" placeholder="请输入登录密码"  ng-model="user.password" ng-minlength="4" required />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-12">
+                                <div class="input-group col-sm-12">
+                                    <input name="verifyCode" type="text" class="form-control col-sm-5" placeholder="请输入验证码" ng-model="user.captcha" required />
+                                    <span class="input-group-btn" style="padding-left:2rem;">
+                                        <img class="img-rounded" src="{{codeurl}}" ng-click="refreshCaptcha()" style="max-height: 34px;" />
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group text-danger-dk" >
+                            <div class="col-lg-12">
+                                <span class="form-control-static " >{{errInfo}}</span>
+                                <span ng-show="errCode == 1103">，<span  class="form-control-static text-u-l text-dark-dker cusor-pointer" ui-sref="access.forgotpwd">忘记密码？</span></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="checkbox col-lg-6 col-sm-6">
+                                <!--<label><input ng-model="user.rememberMe" type="checkbox" />自动登录</label>-->
+                                <label class="i-checks">
+                                    <input type="checkbox" ng-model="user.rememberMe" ><i></i> 自动登录
+                                </label>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-12 m-t-sm">
+                                <button type="submit" class="btn btn-lg btn-primary btn-block" ng-click="login()"  ng-disabled='form.$invalid'>立即登录</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 column"></div>
+    </div>
+    <div class="row">
+        <div class=""></div>
+    </div>
+
+
+    <div class="text-center" ng-include="'tpl/blocks/page_footer.html'"></div>
+</div>

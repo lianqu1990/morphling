@@ -1,0 +1,37 @@
+
+<div class="modal-body form-horizontal form">
+    <div class="form-body portlet light">
+        <div class="portlet-title clearfloat" style="padding-bottom:10px;border-bottom:1px solid #ececec;">
+            <div class="caption font-green-sharp" style="display:inline-block;float:left;">
+                <i class="fa fa-plus"></i>
+                <span class="caption-subject bold uppercase">{{username}}：应用配置</span>
+            </div>
+            <div class="tools" style="float:right; cursor:pointer;">
+                <i class="fa fa-close" ng-click="cancel()"></i>
+            </div>
+        </div>
+        <div class="portlet-body">
+            <div class="row m-t-sm">
+                <div class="col-md-12">
+                    <div class="row row-sm text-center">
+                        <div class="col-xs-3 col-md-2" ng-repeat="app in apps">
+                            <div href class="block panel padder-v item bg-primary" >
+                                <span class="text-white font-thin h5 block">{{app.appName}}</span>
+                                <span class="text-muted text-xs">{{app.appDes}}：{{app.env}}</span>
+                                <span class="bottom text-right w-full">
+                                <i  class="glyphicon glyphicon-leaf text-muted m-r-sm"></i>
+                            </span>
+                                <a class="top text-right w-full cusor-pointer btn-delete" ng-click="deleteApp(app.id)">
+                                    <i class="fa fa-times  m-r-sm"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ui-form-grid></ui-form-grid>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+</div>

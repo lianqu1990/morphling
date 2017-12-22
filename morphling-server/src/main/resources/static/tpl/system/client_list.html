@@ -1,0 +1,44 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm font-chinese" ng-init="
+    app.settings.asideFolded = false;
+    app.settings.asideDock = false;
+  " ng-controller="ClientController">
+    <div class="bg-light lter b-b wrapper-md font-chinese">
+        <h5 class="m-n font-bold h5">客户端管理</h5>
+    </div>
+    <ui-foo-table>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row row-sm text-center">
+                    <div class="col-xs-3 col-md-2" >
+                        <div href class="block panel padder-v bg-primary item">
+                            <span class="text-white font-thin h5 block">{{table.rows.length}}</span>
+                            <span class="text-muted text-xs">客户端</span>
+                            <span class="bottom text-right w-full"><i class="fa fa-exchange text-muted m-r-sm"></i></span>
+                        </div>
+                    </div>
+                    <div class="col-xs-3 col-md-2">
+                        <div href class="block panel padder-v bg-success item">
+                            <span class="text-white font-thin h5 block">{{table.rows.length-errorNum}}</span>
+                            <span class="text-muted text-xs">在线</span>
+                            <span class="bottom text-right w-full"><i class="fa fa-leaf text-muted m-r-sm"></i></span>
+                        </div>
+                    </div>
+                    <div class="col-xs-3 col-md-2">
+                        <div href class="block panel padder-v bg-danger item">
+                            <span class="text-white font-thin h5 block">{{errorNum}}</span>
+                            <span class="text-muted text-xs">离线</span>
+                            <span class="bottom text-right w-full"><i class="fa  fa-unlink text-muted m-r-sm"></i></span>
+                        </div>
+                    </div>
+                    <div class="col-xs-3 col-md-2">
+                        <a href class="block panel padder-v  item" ng-click="addClient()">
+                            <span class="text-muted text-2x"><i class="fa fa-plus"></i></span>
+                            <span class="bottom text-right w-full"><i class="fa fa-cloud-upload text-muted m-r-sm"></i></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </ui-foo-table>
+</div>

@@ -1,0 +1,235 @@
+<div class="wrapper">
+    <div class="modal-backdrop fade in" ng-show="loading" style="z-index: 1040;">
+        <div class="cube1"></div>
+        <div class="cube2"></div>
+    </div>
+    <div class="panel panel-default form-horizontal form" role="form" id="test" >
+        <div class="panel-heading" ng-show="table.params">
+            查询条件
+        </div>
+
+        <div class="row wrapper disabled" ng-show="table.params">
+            <form>
+                <div class="col-md-9">
+                    <div class="col-md-{{field.cols}}" ng-repeat="field in table.params" >
+                        <div class="form-group" >
+                            <label class="col-md-{{field.labelCols}} control-label" style="padding-right: 0;"><i ng-if="field.required" class="fa fa-exclamation-circle text-danger m-r-xs"></i>{{field.label}}</label>
+                            <!-- orgTree -->
+                            <div class="col-md-{{field.labelCols==''?'':12-field.labelCols}} dbFormItem"
+                                 ng-if="field.type=='orgTree'">
+                                <db-org-tree></db-org-tree>
+                            </div>
+                            <div class="col-md-{{field.labelCols==''?'': (12 - field.labelCols - 1)}}"
+                                 ng-if="field.type==='text'">
+                                <input ng-model='table.queryParams[field.name]' type="text"
+                                       placeholder="{{field.placeholder}}"
+                                       class="form-control">
+                            </div>
+                            <div class="col-md-{{field.labelCols==''?'': (12 - field.labelCols - 1)}}"
+                                 ng-if="field.type==='number'">
+                                <input ng-model='table.queryParams[field.name]' type="number"
+                                       placeholder="{{field.placeholder}}"
+                                       class="form-control">
+                            </div>
+                            <div class="col-md-{{field.labelCols==''?'': (12 - field.labelCols - 1)}}"
+                                 ng-if="field.type==='select'">
+                                <select class="form-control" ng-model="table.queryParams[field.name]">
+                                    <option value="">全部</option>
+                                    <option ng-repeat="item in field.items" ng-value="item.key">{{item.value}}</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-{{field.labelCols==''?'': (12 - field.labelCols - 1)}}"
+                                 ng-if="field.type==='groupSelect'">
+                                <ui-select ng-model="table.queryParams[field.name]" theme="bootstrap" ng-disabled="disabled" style="min-width: 300px;">
+                                    <ui-select-match >{{$select.selected.value}}</ui-select-match>
+                                    <ui-select-choices group-by="'group'" repeat="item in field.items | propsFilter: {value: $select.search}">
+                                        <div ng-bind-html="item.value | highlight: $select.search"></div>
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div>
+
+                            <div class="col-md-{{field.labelCols==''?'': (12 - field.labelCols - 1)}}"
+                                 ng-if="field.type==='dateRange'">
+                                <input ng-model='table.queryParams[field.name]' type="text"
+                                       placeholder="{{field.placeholder}}"
+                                       class="form-control" ui-jq="daterangepicker" ui-options="{{field.options['dateRangeOptions']}}" >
+                            </div>
+                            <div class="col-md-{{field.labelCols==''?'': (12 - field.labelCols - 1)}}"
+                                 ng-if="field.type==='date'">
+                                <div class="input-group" ng-controller="DatepickerDemoCtrl">
+                                    <input type="text" class="form-control" datepicker-popup="{{field.options['dateFormat']}}" ng-model="table.queryParams[field.name]"
+                                           is-open="opened" datepicker-options="{{field.options['dateOptions']}}"
+                                           close-text="关闭" current-text="今天" clear-text="清空"/>
+                                    <span class=" input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="open($event)"><i
+                                                class="glyphicon glyphicon-calendar"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-3" style="padding: 0;">
+                    <div class="col-md-6 col-sm-6 text-center" style="margin-bottom:0px;">
+                        <button  type="button" ng-click="table.operations.resetQuery()" class="btn btn-info">
+                            <i class="fa fa-mail-reply"></i>&nbsp;重置
+                        </button>
+                    </div>
+                    <div class="col-md-6 col-sm-6 text-center mt-10-sm" style="margin-bottom:0px;">
+                        <button type="button" ng-click="table.operations.reloadData()" class="btn btn-primary">
+                            <i class="fa fa-search"></i>&nbsp;查询
+                        </button>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+        <ng-transclude></ng-transclude>
+        <div class="">
+            <div class="panel-heading">
+                数据列表
+            </div>
+            <div class="operateBtns" style="padding:15px; padding-bottom:0px;">
+                <button ng-if="table.operationEvents.length > 0"
+                        ng-repeat="button in table.operationEvents"
+                        class="btn btn-sm {{button.class}}" type="button"
+                        ng-click="table.operations.operationButtonClick(button.click)" style="margin-right:10px;">
+                    <i ng-if="button.icon" class="{{button.icon}}"></i>
+                    &nbsp;{{button.name}}
+                </button>
+            </div>
+            <div class="table-responsive table-scrollable" style="padding:15px;">
+
+                <table class="table table-striped table-bordered table-hover dataTable no-footer">
+                    <thead>
+                    <tr style="background-color: #E9ECF3;">
+                        <th ng-if="table.settings.showCheckBox"
+                            style="vertical-align: middle;width:5%;text-align: center;padding: 0px;border-right-width: 0px;">
+
+                            <div class="form-group form-md-checkboxes" style="margin: 0px;">
+                                <div class="md-checkbox-inline" style="width: 64px; margin: 0px;">
+                                    <div class="md-checkbox">
+
+                                        <label class="i-checks m-b-none" ng-click="table.operations.allRowChecked()"
+                                               ng-if="table.settings.allRowChecked">
+                                            <input type="checkbox" checked="checked"><i></i>
+                                        </label>
+
+                                        <label class="i-checks m-b-none" ng-click="table.operations.allRowChecked()"
+                                               ng-if="!table.settings.allRowChecked">
+                                            <input type="checkbox"><i></i>
+                                        </label>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </th>
+                        <th ng-repeat="header in table.headers"
+                            style="width:{{header.width}};text-align: center;cursor:pointer;" ng-show="true"
+                            title="{{header.name}}" >
+                            <span class="headerName">{{header.name}}</span>
+                        </th>
+                        <th ng-if="table.rowEvents.length > 0"
+                            style="text-align: center;vertical-align: middle;">操作
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr ng-repeat="row in table.rows" ng-init="r_index=$index">
+                        <th ng-if="table.settings.showCheckBox"
+                            style="vertical-align: middle;width:5%;text-align: center;padding: 0px;border-right-width: 0px;">
+
+                            <div class="form-group form-md-checkboxes" style="margin: 0px;">
+                                <div class="md-checkbox-inline" style="width: 64px; margin: 0px;">
+                                    <div class="md-checkbox">
+
+                                        <label class="i-checks m-b-none" ng-click="table.operations.checkedRow(row)"
+                                               ng-if="row.checked">
+                                            <input type="checkbox" checked="checked"><i></i>
+                                        </label>
+
+                                        <label class="i-checks m-b-none" ng-click="table.operations.checkedRow(row)"
+                                               ng-if="!row.checked">
+                                            <input type="checkbox"><i></i>
+                                        </label>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </th>
+                        <td ng-repeat="header in table.headers" style="text-align: center; vertical-align: middle"
+                            ng-show="true" >
+                            <div compile ng-if="header.compile"  style="max-width:100%" ng-bind-html="row[header.field]" ></div>
+                            <a ng-click="header.clickEvent(table._rows[r_index][header.field],table._rows[r_index])"  ng-if="!header.compile && header.clickEvent">
+                                {{row[header.field]}}
+                            </a>
+                            <span ng-if="!header.compile && !header.clickEvent"  > {{row[header.field]}}</span>
+                        </td>
+                        <td ng-if="table.rowEvents.length" style="text-align: center;vertical-align: middle">
+                            <button type="button" style="padding: 3px 8px; margin-right:3px;"
+                                    class="btn btn-default {{button.class}}"
+                                    ng-disabled="button.isDisabled(table._rows[r_index])"
+                                    ng-show="(button.isShow && button.isShow(table._rows[r_index])) || !button.isShow"
+                                    ng-repeat="button in table.rowEvents"
+                                    ng-click="button.click(table._rows[r_index])" title="{{button.name}}">
+                                {{button.name}}
+                            </button>
+                        </td>
+                    </tr>
+                    <tr ng-show="table.rows.length==0">
+
+                        <td width="100%"
+                            ng-if="!table.settings.showCheckBox && !(table.rowEvents.length > 0)"
+                            colspan="{{table.headers.length}}" class="text-center">
+                            {{table.loadingTip}}
+                        </td>
+                        <td width="100%"
+                            ng-if="table.settings.showCheckBox != (table.rowEvents.length > 0)"
+                            colspan="{{table.headers.length + 1}}" class="text-center">
+                            {{dbFormGrid.loadingTip}}
+                        </td>
+                        <td width="100%"
+                            ng-if="table.settings.showCheckBox && (table.rowEvents.length > 0)"
+                            colspan="{{table.headers.length + 2}}" class="text-center">
+                            {{table.loadingTip}}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <footer class="panel-footer">
+            <div class="text-right">
+                <ul class="pagination">
+                    <li class="paginate_button" ng-click="table.operations.reloadData()">
+                        <a href="javascript:;" class="refresh"><i class="fa fa-refresh"></i></a>
+                    </li>
+                    <li class="paginate_button previous {{table.page.prevPageDisabled}}"
+                        ng-click="table.operations.pageNumberClick('prev')">
+                        <a href="javascript:;"><i class="fa fa-angle-left"></i></a>
+                    </li>
+                    <li ng-repeat="pageNumber in table.page.pageNumbers"
+                        class="paginate_button {{pageNumber.active}} {{pageNumber.disabled}}"
+                        ng-click="table.operations.pageNumberClick(pageNumber.number)">
+                        <a href="javascript:;">{{pageNumber.number}}</a>
+                    </li>
+                    <li class="paginate_button next {{table.page.nextPageDisabled}}"
+                        ng-click="table.operations.pageNumberClick('next')"><a href="javascript:;"><i
+                            class="fa fa-angle-right"></i></a>
+                    </li>
+                    <li class="paginate_button disabled"><a href="javascript:;">{{table.page.totalRecords}}条/{{dbFormGrid.page.totalPages}}页</a>
+                    </li>
+                </ul>
+            </div>
+        </footer>
+    </div>
+
+</div>
+
+

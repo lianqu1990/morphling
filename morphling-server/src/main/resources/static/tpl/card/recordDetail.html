@@ -1,0 +1,59 @@
+<form class="bs-example form-horizontal form-validation" name="form">
+    <div class="modal-body form-horizontal form">
+        <div class="form-body portlet light">
+            <div class="portlet-title clearfloat" style="padding-bottom:10px;border-bottom:1px solid #ececec;">
+                <div class="caption font-green-sharp" style="display:inline-block;float:left;">
+                    <i class="fa fa-plus"></i>
+                    <span class="caption-subject bold uppercase">订单详情</span>
+                </div>
+                <div class="tools" style="float:right; cursor:pointer;">
+                    <i class="fa fa-close" ng-click="cancel()"></i>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="table-responsive">
+                    <table class="table table-striped b-t b-light">
+                        <thead>
+                        <tr>
+                            <th>订单编号</th>
+                            <th>下单时间</th>
+                            <th>当前状态</th>
+                            <th>商品金额</th>
+                            <th>配送地址</th>
+                            <th>联系电话</th>
+                            <th>送达时间</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>{{order.orderNo}}</td>
+                            <td>{{order.createTimeStr}}</td>
+                            <td>{{order.statusDesc}}</td>
+                            <td>{{order.totalPrice}}</td>
+                            <td>{{order.address.address}}</td>
+                            <td>{{order.address.phone}}</td>
+                            <td></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-striped b-t b-light">
+                    <tr ng-repeat="good in order.goods">
+                        <td><img style="max-height:50px;" ng-src="{{good.goodsThumb}}"/></td>
+                        <td>{{good.goodsName}}</td>
+                        <td>{{good.promotePrice}}</td>
+                        <td> x {{good.goodsNum}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+    </div>
+
+
+</form>

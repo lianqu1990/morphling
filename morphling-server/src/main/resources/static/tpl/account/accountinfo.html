@@ -1,0 +1,86 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm font-chinese" ng-init="
+    app.settings.asideFolded = false;
+    app.settings.asideDock = false;
+  " ng-controller="AccountinfoController">
+    <div class="bg-light lter b-b wrapper-md font-chinese">
+        <h5 class="m-n font-bold h5">个人账户</h5>
+    </div>
+    <div class="row clearfix m-t-md">
+        <div class="col-md-12 column">
+            <div class="panel panel-default">
+                <div class="panel-body ">
+                    敬请期待！
+                    <!--<form class="bs-example form-horizontal form-validation" name="bankForm">
+
+                        <div class="form-group" >
+                            <label class="col-lg-2 control-label">开户行：</label>
+                            <div class="col-lg-6">
+                                <select class="form-control" ng-model="info.bank" required ng-disabled="hasSet">
+                                    <option ng-repeat="bank in banks" >{{bank}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group" >
+                            <label class="col-lg-2 control-label">卡号：</label>
+                            <div class="col-lg-6 ">
+                                <input ng-readonly="hasSet" name="bankNo" type="text" class="form-control" placeholder="请输入银行卡号"  ng-model="info.bankNo"  required />
+                            </div>
+                        </div>
+
+                        <div class="form-group" >
+                            <label class="col-lg-2 control-label">开户人：</label>
+                            <div class="col-lg-6 ">
+                                <input ng-readonly="hasSet" name="bankMaster" type="text" class="form-control" placeholder="请输入开户人姓名"  ng-model="info.bankMaster"  required />
+                            </div>
+                        </div>
+
+                        <div class="form-group" >
+                            <div class="col-lg-5"></div>
+                                <button type="submit" class="col-lg-2 btn btn-primary btn-lg" ng-click="submit()" style="margin-top:50px;" ng-show="!hasSet" >提交</button>
+                            <div class="col-lg-5"></div>
+                        </div>
+                    </form>-->
+                </div>
+            </div>
+        </div>
+
+        <!--<div class="col-md-12 column" ng-show="hasSet">
+            <div class="panel panel-default">
+                <div class="panel-body ">
+                    <form class="bs-example form-horizontal form-validation" name="cashForm">
+                        <div class="form-group" >
+                            <label class="col-lg-2 control-label"></label>
+                            <span class="form-control-static col-lg-8">如无订单异常，将于申请提现后的<span style="color:red">2</span>个工作日到账
+                            ,到账时间视银行不同，存在<span style="color:red">1-2</span>个工作日的延迟，请耐心等待
+                            </span>
+                        </div>
+                        <div class="form-group" >
+                            <label class="col-lg-2 control-label">提现金额：</label>
+                            <div class="col-lg-6 ">
+                                <input ui-jq="TouchSpin" type="text" ng-model="money" placeholder="可提现余额{{info.storeAccount/100}}元" class="form-control" data-min='0' data-max="{{info.storeAccount/100}}" ng-disabled="formDisabled"
+                                       data-step="0.01" data-decimals="2" data-postfix="元">
+                            </div>
+                        </div>
+                        <div class="form-group" >
+                            <label class="col-lg-2 control-label">密码：</label>
+                            <div class="col-lg-6 ">
+                                <input name="password" type="password" class="form-control" placeholder="请输入账户密码"  ng-model="password" ng-minlength="6" ng-maxlength="16" required />
+                            </div>
+                        </div>
+
+                        <div class="form-group" >
+                            <div class="col-lg-5"></div>
+                                <button type="submit" class="col-lg-2 btn btn-primary" ng-click="cash()" style="margin-top:50px;"  >申请提现</button>
+                            <div class="col-lg-5"></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>-->
+    <div class="row">
+        <div class=""></div>
+    </div>
+    <div class="text-center" ng-include="'tpl/blocks/page_footer.html'"></div>
+</div>

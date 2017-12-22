@@ -1,0 +1,96 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm font-chinese" ng-init="
+    app.settings.asideFolded = false;
+    app.settings.asideDock = false;
+  " ng-controller="DeployController">
+    <div class="bg-light lter b-b wrapper-md font-chinese">
+        <div class="btn-group" ng-init="parallel = 'false'">
+            <label class="btn btn-sm btn-info"    ng-model="parallel" btn-radio="'false'"><i class="fa fa-check text-active"></i> 串行</label>
+            <label class="btn btn-sm btn-primary" ng-model="parallel" btn-radio="'true'"><i class="fa fa-check text-active"></i> 并行</label>
+        </div>
+    </div>
+    <ui-foo-table>
+        <div class="row">
+            <div class="col-md-12 ">
+                <div class="panel panel-default" ng-init="appShow=true">
+                    <div class="panel-heading  lt">
+                        <div class="">
+                            <span class="pull-right cusor-pointer" ng-click="appShow= !appShow"><i class="fa  text-primary-dk text-lg" ng-class="{true:'fa-caret-down',false:'fa-caret-up'}[appShow]"></i></span>
+                            <span class="font-bold ">{{app.name}}</span>
+                        </div>
+                    </div>
+                    <div class="panel-body  dk">
+                        <div class="">
+                            <p class="h5  m-b-md">类型：<span class="badge bg-primary">{{{1:"网关",2:"服务"}[app.serviceType]}}</span></p>
+                            <p class="h5  m-b-md">描述：{{app.description}}</p>
+                            <p class="h5  m-b-md">端口：{{app.port}}</p>
+                            <p class="h5  m-b-md">当前安装包版本：{{app.currentPackVersion}}</p>
+                            <p class="h5  m-b-md">仓库地址：{{app.gitUrl}}</p>
+                            <p class="h5  m-b-md">创建时间：{{app.createTime}}</p>
+                            <p class="h5  m-b-md">创建人：{{app.createUsername}}</p>
+                        </div>
+                        <div class="row text-center">
+                            <div class="col-xs-6 col-md-3">
+                                <div href class="block panel padder-v bg-success item" title="所有分配了机器的节点数量">
+                                    <span class="text-white font-thin h5 block">{{table.rows.length}}</span>
+                                    <span class="text-muted text-xs">实例数量</span>
+                                    <span class="bottom text-right w-full"><i class="fa fa-leaf text-muted m-r-sm"></i></span>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-md-3" >
+                                <div href class="block panel padder-v bg-primary item" title="所有操作了停机的机器（可能存在停机失败，导致数量不正确的情况）">
+                                    <span class="text-white font-thin h5 block">{{stoppedCount}}</span>
+                                    <span class="text-muted text-xs">已停机</span>
+                                    <span class="bottom text-right w-full"><i class="fa fa-exchange text-muted m-r-sm"></i></span>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-md-3">
+                                <div href class="block panel padder-v bg-info item" title="所有直连注册中心检查，未注册的机器">
+                                    <span class="text-white font-thin h5 block">{{offlineCount}}</span>
+                                    <span class="text-muted text-xs">未注册</span>
+                                    <span class="bottom text-right w-full"><i class="fa  fa-unlink text-muted m-r-sm"></i></span>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-md-3">
+                                <div href class="block panel padder-v bg-danger item" title="所有通过监控端点检测不正常的机器">
+                                    <span class="text-white font-thin h5 block">{{illedCount}}</span>
+                                    <span class="text-muted text-xs">健康监测失败</span>
+                                    <span class="bottom text-right w-full"><i class="fa  fa-unlink text-muted m-r-sm"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </ui-foo-table>
+
+    <div class="row">
+
+        <div class="wrapper-lg">
+            <ul class="timeline" ng-if="logs.length != 0">
+                <li class="tl-header">
+                    <span class="label bg-info">部署日志</span>
+                </li>
+                <li class="tl-item tl-left" ng-repeat="log in logs">
+                    <div class="tl-wrap b-info">
+                        <span class="tl-date">{{log.createTime}}</span>
+                        <div class="tl-content panel padder b-a">
+                            <span class="arrow left pull-up hidden-left"></span>
+                            <span class="arrow right pull-up visible-left"></span>
+                            <div class="text-lt">类型：{{{5:'部署',6:'管理'}[log.type]}}，用户：{{log.createUsername}}<br/>{{log.serviceName}},&nbsp;&nbsp;<a target="_blank" class="text-info" href="/logs/show/{{log.logId}}">查看详细</a></div>
+                        </div>
+                    </div>
+                </li>
+                <li class="tl-header" ng-if="!logEnd">
+                    <div class="btn btn-sm btn-default btn-rounded" ng-click="loadLogs()">加载更多...</div>
+                </li>
+                <li class="tl-header" ng-if="logEnd">
+                    <i class="fa fa-dot-circle-o"></i>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

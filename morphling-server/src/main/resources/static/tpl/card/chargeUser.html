@@ -1,0 +1,65 @@
+
+<!-- main header -->
+<div class="bg-light lter b-b wrapper-md">
+    <h5 class="m-n font-bold h5">给用户充值</h5>
+</div>
+
+<div class="wrapper-md" ng-controller="ChargeUserController">
+    <div class="row">
+        <div class="col-md-12 m-t-md">
+            <div class="panel panel-default">
+                <div class="panel-heading font-bold">当前账户房卡余额：<span class="text-primary m-r-sm">{{cardLeft}}</span>张</div>
+                <div class="panel-body">
+
+                    <div class="col-lg-6">
+                        <div class="wrapper-sm" ng-show="user">
+                            <div class="hbox h-auto">
+                                <div class="col text-center w-sm">
+                                    <div class="thumb-lg avatar inline">
+                                        <img ng-src="{{user.headImg || 'img/a0.jpg'}}">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- fields -->
+                            <div class="text-center">
+                                <h5>用户ID：{{user.id}}</h5>
+                                <h5>昵称：{{user.nickname}}</h5>
+                                <h5 >剩余卡数：
+                                    <span class='text-l-t' ng-if="user.oldCardNum">{{user.oldCardNum}}</span>
+                                    <span class="badge bg-success text-base">{{user.cardNum}}</span>
+                                </h5>
+                                <h5 ng-if="user.oldCardNum">注意：充值存在延迟，如果数据不准确，请从右边重新查询用户数据</h5>
+                            </div>
+                            <!-- / fields -->
+                            <form name="chargeForm" class="form-validation" >
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" ng-model="num" placeholder="请输入充值的房卡数量" ui-validate=" '$value >= 1' " required>
+                                    <span class="input-group-btn ">
+                                        <button class="btn btn-default btn-dark" ng-disabled="tranfering || cardLeft==0 || chargeForm.$invalid" type="button"  ng-click="transfer()" >充值</button>
+                                    </span>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <p class="text-muted m-b-lg">当前登录账户：{{_userinfo.gameName}}</p>
+                        <form name="form" class="form-validation">
+                            <div class="form-group">
+                                <label>玩家ID</label>
+                                <input type="number" class="form-control" placeholder="请输入玩家ID，游戏中可查看" ng-pattern="/^[0-9]+$/" ng-model="id" required>
+                            </div>
+                            <button type="submit" class="btn btn-sm btn-primary m-t-md" ng-click="query()">确定</button>
+                        </form>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>

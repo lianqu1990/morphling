@@ -1,0 +1,94 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm font-chinese" ng-init="
+    app.settings.asideFolded = false;
+    app.settings.asideDock = false;
+    warningShow=true;
+    loading=false;
+  " ng-controller="DegradeManageController">
+    <div class="bg-light lter b-b wrapper-md font-chinese">
+        <h5 class="m-n font-bold h5">服务降级</h5>
+    </div>
+
+    <div class="col-lg-12 m-t-sm" >
+        <div class="alert alert-danger alert-dismissable" ng-if="warningShow">
+            <button type="button" class="close" data-dismiss="alert" ng-click="closeWarning()"
+                    aria-hidden="true">
+                &times;
+            </button>
+            服务降级通过修改apollo配置，实现客户端配置实时更新。针对使用degrade灰度版本的，无法生效！请不要在degrade上使用灰度！<br/>
+        </div>
+        <pre>
+            1. app上创建名为degrade的namespace，并发布初始版本<br/>
+            2. Appollo上打开/open/manage.html管理页面<br/>
+            3. 查询“morphling”获取此第三方应用token<br/>
+            4. 为morphling对指定app授权
+        </pre>
+    </div>
+
+
+    <div class="row wrapper-md" >
+        <div class="col-md-12 " ng-init="appShow=true">
+            <div class="panel panel-default">
+                <div class="panel-heading  lt">
+                    <div class="">
+                        <span class="pull-right cusor-pointer" ng-click="appShow= !appShow"><i class="fa  text-primary-dk text-lg" ng-class="{true:'fa-caret-down',false:'fa-caret-up'}[appShow]"></i></span>
+                        <span class="font-bold ">{{app.name}}</span>
+                    </div>
+                </div>
+                <div class="panel-body  dk" ng-if="appShow">
+                    <div class="">
+                        <p class="h5  m-b-md">类型：<span class="badge bg-primary">{{{1:"网关",2:"服务"}[app.serviceType]}}</span></p>
+                        <p class="h5  m-b-md">描述：{{app.description}}</p>
+                        <p class="h5  m-b-md">端口：{{app.port}}</p>
+                        <p class="h5  m-b-md">当前安装包版本：{{app.currentPackVersion}}</p>
+                        <p class="h5  m-b-md">仓库地址：{{app.gitUrl}}</p>
+                        <p class="h5  m-b-md">创建时间：{{app.createTime}}</p>
+                        <p class="h5  m-b-md">创建人：{{app.createUsername}}</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-md-12 " >
+            <table class="table" name="degradeForm">
+                <thead class="text-danger-dk">
+                    <tr>
+                        <th>业务名称</th>
+                        <th>配置键</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="endpoint in degradeEndpoints">
+                        <th style="vertical-align:middle">{{endpoint.bizName}}</th>
+                        <th style="vertical-align:middle">{{endpoint.key}}</th>
+                        <th style="vertical-align:middle">
+                            <span ng-if="endpoint.open" class="label text-danger-dk"><i class="fa fa-frown-o text-danger"></i>&nbsp;降级中</span>
+                            <span ng-if="!endpoint.open" class="label text-success-dker"><i class="fa fa-smile-o text-success"></i>&nbsp;状态正常</span>
+                        </th>
+                        <th>
+                            <label class="i-switch i-switch-md bg-danger m-t-xs m-r">
+                                <input type="checkbox" name="{{endpoint.key}}" ng-checked="endpoint.open">
+                                <i></i>
+                            </label>
+                        </th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-md-12">
+            <div class="col-lg-5 col-sm-0"></div>
+            <button type="submit" class="col-sm-2 col-lg-2 btn btn-danger btn-lg" ng-click="submit()" style="margin-top:50px;"  >立即生效</button>
+            <div class="col-lg-5 col-sm-0"></div>
+        </div>
+
+    </div>
+
+    <div class="modal-backdrop fade in" ng-show="loading" style="z-index: 1040;">
+        <div class="cube1"></div>
+        <div class="cube2"></div>
+    </div>
+
+</div>

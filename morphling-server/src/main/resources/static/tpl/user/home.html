@@ -1,0 +1,28 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm font-chinese" ng-init="
+    app.settings.asideFolded = false; 
+    app.settings.asideDock = false;
+  ">
+    <!-- main -->
+    <div class="col" ng-controller="HomeController">
+        <!-- main header -->
+
+        <div class="col-md-12 m-t-lg">
+            <div class=" panel panel-default">
+                <div class="panel-body">
+                    <div class="clearfix text-center m-t">
+                        <div class="inline">
+                            <div class="thumb-xl">
+                                <img width="100px" ng-src="{{_userinfo.headImg || 'img/a0.jpg'}}" class="img-circle" alt="...">
+                            </div>
+                            <div class="h1 m-t m-b-xs"><label class="badge bg-info text-lg "><i class="fa fa-users icon "></i> {{_userinfo.name}}</label></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-group no-radius alt">
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- / right col -->
+</div>

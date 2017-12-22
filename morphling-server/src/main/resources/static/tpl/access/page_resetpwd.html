@@ -1,0 +1,82 @@
+<div class="container w-full w-auto-xs font-chinese" ng-controller="ResetPwdController" ng-init="app.settings.container = false;">
+    <a href class="navbar-brand block m-t" ui-sref="app.home">{{app.name}}</a>
+    <div class="row clearfix m-t-md">
+        <div class="col-md-5 column"></div>
+        <div class="col-md-2 column">
+            <div class="row clearfix">
+                <div class="col-md-12 column">
+                    <form class="form-horizontal form-validation" role="form" name="form">
+                        <div class="form-group">
+                            <div class="col-sm-12 ">
+                                <input name="phone" class="form-control" readonly value="{{phone}}" ng-model="phone"  required />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-12 ">
+                                <input name="password" type="password" class="form-control" placeholder="请输入登录密码"  ng-model="password" ng-minlength="6" ng-maxlength="16" required />
+                            </div>
+                        </div>
+                        <div class="form-group" >
+                            <div class="col-sm-12 ">
+                                <input name="newPassword" type="password" class="form-control" placeholder="重复密码"  ng-model="newPassword" ng-minlength="6" ng-maxlength="16" required/>
+                            </div>
+                        </div>
+                        <div class="form-group text-danger-dk" ng-show="(form.password.$dirty && form.password.$invalid) || (form.password.$valid && form.newPassword.$invalid)">
+                            <div class="col-sm-12">
+                                <span class="form-control-static" >密码长度为6-16！</span>
+                            </div>
+                        </div>
+                        <div class="form-group text-danger-dk" ng-show="form.$valid && rePasswordInvalid">
+                            <div class="col-sm-12">
+                                <span class="form-control-static" >两次密码不一致！</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-6">
+                                <button type="submit" class="btn btn-lg btn-primary btn-block" ng-disabled='form.$invalid || !phone || !code || rePasswordInvalid' ng-click="resetPass()">完成</button>
+                            </div>
+                            <div class="col-sm-6">
+                                <a type="button" class="btn btn-lg btn-primary btn-block" href="{{baseUrl}}">返回首页</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5 column"></div>
+    </div>
+    <div class="row">
+        <div class=""></div>
+    </div>
+
+
+    <!--<div class="container m-b-lg w-xxl w-auto-xs">
+        <div class="wrapper text-center">
+            <strong>欢迎登陆</strong>
+        </div>
+        <form name="form" class="form-validation">
+            <div class="text-danger wrapper text-center" ng-show="authError">
+                {{authError}}
+            </div>
+            <div class= "list-group list-group-sm">
+                <div class="form-group" >
+                    <input name="username" type="text" class="form-control" placeholder="请输入注册手机号" ng-model="user.name" ng-pattern="/^1[34578]\d{9}$/" required >
+                </div>
+                <div class="form-group">
+                    <input name="password" type="password" class="form-control" placeholder="请输入登录密码" ng-model="user.password"  required >
+                </div>
+                <span></span>
+            </div>
+            <button type="submit" class="btn btn-lg btn-primary btn-block" ng-click="login()"
+                    ng-disabled='form.$invalid'>Log in
+            </button>
+            <div class="text-center m-t m-b"><a ui-sref="access.forgotpwd">Forgot password?</a></div>
+            <div class="line line-dashed"></div>
+            <p class="text-center">
+                <small>Do not have an account?</small>
+            </p>
+            <a ui-sref="access.signup" class="btn btn-lg btn-default btn-block">Create an account</a>
+        </form>
+    </div>-->
+    <div class="text-center" ng-include="'tpl/blocks/page_footer.html'"></div>
+</div>

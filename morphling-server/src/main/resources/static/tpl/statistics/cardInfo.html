@@ -1,0 +1,36 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm font-chinese" ng-init="
+    app.settings.asideFolded = false;
+    app.settings.asideDock = false;
+  " ng-controller="CardStatisticsController">
+    <div class="bg-light lter b-b wrapper-md font-chinese">
+        <h5 class="m-n font-bold h5">售卡数据统计</h5>
+    </div>
+    <div class="row m-t-lg ">
+        <div class="col-lg-12">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-10">
+                <div class="panel panel-default">
+                    <ul class="list-group no-radius">
+                        <li class="list-group-item">
+                            <span class="pull-right m-r-lg">{{totalLeftCard}}</span>
+                            <span class="label bg-primary">1</span>
+                            代理总余额
+                        </li>
+                        <li class="list-group-item">
+                            <span class="pull-right m-r-lg">{{allCost}}</span>
+                            <span class="label bg-info">2</span>
+                            历史销售总量
+                        </li>
+                        <li class="list-group-item">
+                            <span class="pull-right m-r-lg">{{todayCost}}</span>
+                            <span class="label bg-warning">3</span>
+                            今日销售总量
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-1"></div>
+        </div>
+    </div>
+    <ui-form-grid></ui-form-grid>
+</div>

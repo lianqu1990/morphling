@@ -1,0 +1,52 @@
+
+<!-- main header -->
+<div class="bg-light lter b-b wrapper-md">
+    <h5 class="m-n font-bold h5">创建代理</h5>
+</div>
+
+<div class="wrapper-md" ng-controller="CreateAgentController">
+    <div class="modal-backdrop fade in" ng-show="showLoading" style="z-index: 1040;">
+        <div class="cube1"></div>
+        <div class="cube2"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 m-t-md">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="col-lg-6">
+                        <div class="wrapper-sm" ng-show="agent">
+                            <div class="hbox h-auto">
+                                <div class="col text-center w-sm">
+                                    <div class="thumb-lg avatar inline">
+                                        <img ng-src="{{agent.headImg || 'img/a0.jpg'}}">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- fields -->
+                            <div class="text-center">
+                                <h5>代理ID：{{agent.id}}</h5>
+                                <h5>姓名：{{agent.realname}}</h5>
+                            </div>
+                            <div id="_agent_result" class="text-center text-danger-dker"><span>账号：{{agent.id}}，密码：{{agent.password}}，请在登陆后立即修改密码！</span></div>
+                            <hr/>
+                            <!-- / fields -->
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <p class="text-muted m-b-lg">输入姓名后点击创建，系统将为您自动生成下线代理</p>
+                        <form name="form" class="form-validation">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="请输入姓名" ng-model="realname" required >
+                            </div>
+                            <button class="btn btn-info btn-addon" ng-click="create()"><i class="fa fa-play"></i>开始创建</button>
+                        </form>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>

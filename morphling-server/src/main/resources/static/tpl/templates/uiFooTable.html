@@ -1,0 +1,112 @@
+<div class="wrapper">
+    <div class="modal-backdrop fade in" ng-show="loading" style="z-index: 1040;">
+        <div class="cube1"></div>
+        <div class="cube2"></div>
+    </div>
+    <ng-transclude></ng-transclude>
+    <div class="panel hbox hbox-auto-xs no-border padder">
+        <div class="panel-body b-b b-light">
+            <span class="label text-dark-dker"><i class="glyphicon glyphicon-filter"></i> </span>
+            <input id="{{table.settings.filterId || 'filter'}}" style="border:none;border-bottom: solid 1px #252833" type="text" class="form-control input-sm w-sm inline m-r"/>
+            <a class="refresh-btn form-control-static" style="float:right;" ng-click="table.operations.reloadData()"><i class="fa fa-refresh"></i></a>
+        </div>
+        <div class="operateBtns" style="padding:15px; padding-top:0px;">
+            <button ng-if="table.operationEvents.length > 0"
+                    ng-repeat="button in table.operationEvents"
+                    class="btn btn-sm {{button.class}}" type="button"
+                    ng-click="table.operations.operationButtonClick(button.click)" style="margin-right:10px;">
+                <i ng-if="button.icon" class="{{button.icon}}"></i>
+                &nbsp;{{button.name}}
+            </button>
+        </div>
+        <div>
+            <table class="table m-b-none" ui-jq="footable" ng-attr-data-filter="#{{table.settings.filterId || 'filter'}}" data-page-size="{{table.pageSize ? table.pageSize : 10}}" >
+                <thead>
+                    <tr >
+                        <th ng-if="table.settings.showCheckBox" data-sort-ignore="true"
+                            style="vertical-align: middle;width:5%;text-align: center;padding: 0px;border-right-width: 0px;">
+
+                            <div class="form-group form-md-checkboxes" style="margin: 0px;">
+                                <div class="md-checkbox-inline" style="width: 64px; margin: 0px;">
+                                    <div class="md-checkbox">
+
+                                        <label class="i-checks m-b-none" ng-click="table.operations.allRowChecked()"
+                                               ng-if="table.settings.allRowChecked">
+                                            <input type="checkbox" checked="checked"><i></i>
+                                        </label>
+
+                                        <label class="i-checks m-b-none" ng-click="table.operations.allRowChecked()"
+                                               ng-if="!table.settings.allRowChecked">
+                                            <input type="checkbox"><i></i>
+                                        </label>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </th>
+                        <th ng-repeat="header in table.headers" data-toggle="{{$index == 0 ? 'true' : 'false'}}" data-hide="{{header.hide || ($index == 0 ? '' : 'phone')}}" ng-class="header.class"
+                            style="text-align: center;vertical-align: middle">
+                            {{header.name}}
+                        </th>
+                        <th ng-if="table.rowEvents.length > 0" class="operation" style="text-align: center;vertical-align: middle">操作
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="row in table.rows" ng-init="r_index=$index" listen-foo-table-finish>
+                        <td ng-if="table.settings.showCheckBox"
+                            style="vertical-align: middle;width:5%;text-align: center;padding: 0px;border-right-width: 0px;">
+
+                            <div class="form-group form-md-checkboxes" style="margin: 0px;">
+                                <div class="md-checkbox-inline" style="width: 64px; margin: 0px;">
+                                    <div class="md-checkbox">
+
+                                        <label class="i-checks m-b-none" ng-click="table.operations.checkedRow(row)"
+                                               ng-if="row.checked">
+                                            <input type="checkbox" checked="checked"><i></i>
+                                        </label>
+
+                                        <label class="i-checks m-b-none" ng-click="table.operations.checkedRow(row)"
+                                               ng-if="!row.checked">
+                                            <input type="checkbox"><i></i>
+                                        </label>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </td>
+                        <td ng-repeat="header in table.headers" data-value="{{table._rows[r_index][header.field]}}" ng-class="header.class"
+                            style="text-align: center;vertical-align: middle">
+                            <div compile ng-if="header.compile && !header.directive"  style="max-width:100%" ng-bind-html="row[header.field]" ></div>
+                            <a ng-click="header.clickEvent(table._rows[r_index][header.field],table._rows[r_index])"  ng-if="!header.compile && header.clickEvent">
+                                {{row[header.field]}}
+                            </a>
+                            <span ng-if="!header.compile && !header.clickEvent"  > {{row[header.field]}}</span>
+                        </td>
+                        <td ng-if="table.rowEvents.length > 0" style="text-align: center;vertical-align: middle">
+                            <button type="button" style="padding: 3px 8px; margin-right:3px;"
+                                    class="btn btn-default {{button.class}}"
+                                    ng-disabled="button.isDisabled(table._rows[r_index])"
+                                    ng-show="(button.isShow && button.isShow(table._rows[r_index])) || !button.isShow"
+                                    ng-repeat="button in table.rowEvents"
+                                    ng-click="button.click(table._rows[r_index])" title="{{button.name}}">
+                                {{button.name}}
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot ng-class="{true:'hide-if-no-paging',false:''}[table.settings.pagerHide]">
+                    <tr>
+                        <td colspan="5" class="text-center">
+                            <ul class="pagination"></ul>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+
+

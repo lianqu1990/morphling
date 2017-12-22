@@ -1,0 +1,25 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm font-chinese" ng-init="
+    app.settings.asideFolded = false;
+    app.settings.asideDock = false;
+  " ng-controller="SelectAppController">
+    <div class="bg-light lter b-b wrapper-md font-chinese">
+        <h5 class="m-n font-bold h5">应用列表</h5>
+    </div>
+    <div class="row wrapper-md">
+        <div class="col-md-12">
+            <div class="row row-sm text-center">
+                <div class="col-xs-3 col-md-2" ng-repeat="app in apps">
+                    <a href class="block panel padder-v item" ng-init="rd = random()"
+                       ng-click="selectApp(app.id)"
+                       ng-class="{0:'bg-info',1:'bg-success',2:'bg-warning',3:'bg-primary',4:'bg-dark'}[rd]">
+                        <span class="text-white font-thin h5 block">{{app.name}}</span>
+                        <span class="text-muted text-xs">{{app.description}}</span>
+                        <span class="bottom text-right w-full" >
+                            <i  class="fa fa-cloud text-muted m-r-sm"></i>
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

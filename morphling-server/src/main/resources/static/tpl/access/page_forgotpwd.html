@@ -1,0 +1,42 @@
+<div class="container w-full w-auto-xs font-chinese" ng-init="app.settings.container = false;" ng-controller="ForgotPwdController">
+    <a href class="navbar-brand block m-t" ui-sref="app.home">{{app.name}}</a>
+    <div class="row clearfix m-t-md">
+        <div class="col-md-5 column"></div>
+        <div class="col-md-2 column">
+            <div class="row clearfix">
+                <div class="col-md-12 column">
+                    <form class="form-horizontal form-validation" role="form" name="form">
+                        <div class="form-group" ng-class="{true:'has-error',false:''}[form.phone.$dirty && form.phone.$invalid]">
+                            <div class="col-sm-12 ">
+                                <input name="phone" type="text" class="form-control" placeholder="请输入注册手机号" ng-model="phone" ng-pattern="/^1[34578]\d{9}$/" required />
+                            </div>
+                        </div>
+                        <div class="form-group" >
+                            <div class="col-sm-6 ">
+                                <input name="code" type="text" class="form-control" placeholder="请输入验证码" ng-model="code" required />
+                            </div>
+                            <div class="col-sm-6">
+                                <button type="button" class="form-control-static btn btn-info btn-block" ng-click="sendCode()" ng-disabled="form.phone.$invalid || sending">{{sendtext}}</button>
+                            </div>
+                        </div>
+                        <div class="form-group text-danger-dk" ng-show="errInfo">
+                            <div class="col-sm-12">
+                                <span class="form-control-static" >{{errInfo}}</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <button type="submit" class="btn btn-lg btn-primary btn-block" ng-click="doReset()" ng-disabled='form.$invalid'>下一步</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5 column"></div>
+    </div>
+    <div class="row">
+        <div class=""></div>
+    </div>
+    <div class="text-center" ng-include="'tpl/blocks/page_footer.html'"></div>
+</div>

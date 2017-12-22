@@ -1,0 +1,168 @@
+<div class="bg-light lter b-b wrapper-md font-chinese">
+    <h5 class="m-n font-bold h5">游戏数据统计</h5>
+</div>
+<div class="wrapper-md font-chinese" ng-controller="StaGameController">
+    <div>
+        <div class="row" ng-if="online && his">
+            <div class="col-md-12">
+                <progressbar max="30" value="dynamic" type="info" class="progress-striped active m-b-sm"><span style="white-space:nowrap;"></span></progressbar>
+            </div>
+        </div>
+        <div class="row" >
+
+            <div class="col-md-6" ng-if="sale">
+                <div class="panel panel-default">
+                    <div class="panel-heading font-bold">销售数据(销售给用户)</div>
+                    <div class="panel-body">
+                        <div ui-jq="plot" ui-refresh="sale" ui-options="
+                                  [
+                                    { data: {{sale.datas[0]}}, label:'{{sale.series[0]}}',points: { show: true }, lines: { show: true, fill: true, fillColor: { colors: [{ opacity: 0.1 }, { opacity: 0.1}] } } }
+                                  ],
+
+                                  {
+                                    legend:{show:false},
+                                    colors: ['{{app.color.success}}'],
+                                    series: { shadowSize: 3 },
+                                    xaxis:{
+                                      font: { color: '#ccc' },
+                                      position: 'bottom',
+                                      ticks: sale.labels
+                                    },
+                                    yaxis:{
+                                      font: { color: '#ccc' },
+                                    },
+                                    grid: { hoverable: true, clickable: true, borderWidth: 0, color: '#ccc' },
+                                    tooltip: true,
+                                    tooltipOpts: { content: '%x %s %y',  defaultTheme: false, shifts: { x: 0, y: 20 } }
+                                  }
+                                " style="height:240px" >
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6" ng-if="online">
+                <div class="panel panel-default">
+                    <div class="panel-heading font-bold">实时在线人数</div>
+                    <div class="panel-body">
+                        <div ui-jq="plot" ui-refresh="online" ui-options="
+                                  [
+                                    { data: {{online.datas[0]}}, label:'{{online.series[0]}}',points: { show: true }, lines: { show: true, fill: true, fillColor: { colors: [{ opacity: 0.1 }, { opacity: 0.1}] } } }
+                                  ],
+
+                                  {
+                                    legend:{show:false},
+                                    colors: ['{{app.color.info}}'],
+                                    series: { shadowSize: 3 },
+                                    xaxis:{
+                                      font: { color: '#ccc' },
+                                      position: 'bottom',
+                                      ticks: online.labels
+                                    },
+                                    yaxis:{
+                                      font: { color: '#ccc' },
+                                    },
+                                    grid: { hoverable: true, clickable: true, borderWidth: 0, color: '#ccc' },
+                                    tooltip: true,
+                                    tooltipOpts: { content: '%x %s %y',  defaultTheme: false, shifts: { x: 0, y: 20 } }
+                                  }
+                                " style="height:240px" >
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+
+            <div class="col-md-6" ng-if="currentCard">
+                <div class="panel panel-default">
+                    <div class="panel-heading font-bold">历史当前时刻房卡消耗数量</div>
+                    <div class="panel-body">
+                        <div ui-jq="plot" ui-refresh="his" ui-options="
+                              [
+                                { data: {{currentCard.datas[0]}}, label: '{{currentCard.series[0]}}', points: { show: true },lines: { show: true, fill: true, fillColor: { colors: [{ opacity: 0.1 }, { opacity: 0.1}] } } }
+                              ],
+                              {
+                                legend:{show:false},
+                                colors: ['{{app.color.dark}}' ],
+                                series: { shadowSize: 2 },
+                                xaxis:{
+                                    font: { color: '#ccc' },
+                                    ticks: currentCard.labels
+                                },
+                                yaxis:{ font: { color: '#ccc' } },
+                                grid: { hoverable: true, clickable: true, borderWidth: 0, color: '#ccc' },
+                                tooltip: true,
+                                tooltipOpts: { content: '%s为%y',  defaultTheme: false, shifts: { x: 0, y: 20 } }
+                              }
+                            " style="height:240px">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6" ng-if="his">
+                <div class="panel panel-default">
+                    <div class="panel-heading font-bold">历史最高在线</div>
+                    <div class="panel-body">
+                        <div ui-jq="plot" ui-refresh="his" ui-options="
+                              [
+                                { data: {{his.datas[0]}}, label: '{{his.series[0]}}', points: { show: true }, lines: { show: true, fill: true, fillColor: { colors: [{ opacity: 0.1 }, { opacity: 0.1}] } } }
+                              ],
+                              {
+                                legend:{show:false},
+                                colors: [ '{{app.color.primary}}'],
+                                series: { shadowSize: 2 },
+                                xaxis:{
+                                    font: { color: '#ccc' },
+                                    ticks: his.labels
+                                },
+                                yaxis:{ font: { color: '#ccc' } },
+                                grid: { hoverable: true, clickable: true, borderWidth: 0, color: '#ccc' },
+                                tooltip: true,
+                                tooltipOpts: { content: '%s为%y',  defaultTheme: false, shifts: { x: 0, y: 20 } }
+                              }
+                            " style="height:240px">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-6" ng-if="his">
+                <div class="panel panel-default">
+                    <div class="panel-heading font-bold">历史消耗房卡数量</div>
+                    <div class="panel-body">
+                        <div ui-jq="plot" ui-refresh="his" ui-options="
+                              [
+                                { data: {{his.datas[1]}}, label: '{{his.series[1]}}', points: { show: true },lines: { show: true, fill: true, fillColor: { colors: [{ opacity: 0.1 }, { opacity: 0.1}] } } }
+                              ],
+                              {
+                                legend:{show:false},
+                                colors: ['{{app.color.warning}}' ],
+                                series: { shadowSize: 2 },
+                                xaxis:{
+                                    font: { color: '#ccc' },
+                                    ticks: his.labels
+                                },
+                                yaxis:{ font: { color: '#ccc' } },
+                                grid: { hoverable: true, clickable: true, borderWidth: 0, color: '#ccc' },
+                                tooltip: true,
+                                tooltipOpts: { content: '%s为%y',  defaultTheme: false, shifts: { x: 0, y: 20 } }
+                              }
+                            " style="height:240px">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="row"></div>
+    <div class="row"></div>
+</div>
+
+<!--坐标轴可以用min max控制-->

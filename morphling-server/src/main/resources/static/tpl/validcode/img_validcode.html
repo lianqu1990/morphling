@@ -1,0 +1,36 @@
+<form name="dataForm1" novalidate >
+    <div class="modal-body form-horizontal form">
+        <div class="form-body portlet light">
+            <div class="portlet-title clearfloat" style="padding-bottom:10px;border-bottom:1px solid #ececec;">
+                <div class="caption font-green-sharp" style="display:inline-block;float:left;">
+                    <i class="fa fa-plus"></i>
+                    <span class="caption-subject bold uppercase">验证码</span>
+                </div>
+                <div class="tools" style="float:right; cursor:pointer;">
+                    <i class="fa fa-close" ng-click="cancel()"></i>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="form-body" style="padding:15px;">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="input-group col-sm-12">
+                                <input name="verifyCode" type="text" class="form-control col-sm-5" placeholder="请输入验证码" ng-model="verifyCode" required />
+                                    <span class="input-group-btn" style="padding-left:2rem;">
+                                        <img class="img-rounded" ng-src="{{codeurl}}" ng-click="refreshCaptcha()" style="max-height: 34px;" />
+                                    </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <!-- <button class="btn " ng-class="{'btn-primary':formDisabled,'btn-danger':!formDisabled}" ng-show="editData" type="button" ng-click="changeEdit()">
+            {{formDisabled?'编辑':'取消'}}
+        </button> -->
+        <button class="btn btn-primary" type="button" ng-click="ok()">确定</button>
+        <button class="btn btn-warning" type="button" ng-click="cancel()">关闭</button>
+    </div>
+</form>

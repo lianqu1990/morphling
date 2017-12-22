@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="INFO" monitorInterval="60">
+    <Properties>
+        <Property name="LOG_EXCEPTION_CONVERSION_WORD">%xwEx</Property>
+        <Property name="LOG_LEVEL_PATTERN">%5p</Property>
+        <Property name="LOG_PATTERN">%d{yyyy-MM-dd HH:mm:ss} ${LOG_LEVEL_PATTERN} [%15.15t] %C.%M(%L) --> %m%n${sys:LOG_EXCEPTION_CONVERSION_WORD}</Property>
+    </Properties>
+    <!-- -->
+    <appenders>
+        <RollingFile name="INF" fileName="${log_dir}/${server_name}_inf.log"
+                     filePattern="${log_dir}/pack/${server_name}_inf-%d{yyyy-MM-dd}.log.zip"
+                     immediateFlush="false">
+            <PatternLayout charset="UTF-8"
+                           pattern="${sys:LOG_PATTERN}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+            <DefaultRolloverStrategy max="30"></DefaultRolloverStrategy>
+        </RollingFile>
+        <RollingFile name="ERR" fileName="${log_dir}/${server_name}_err.log"
+                     filePattern="${log_dir}/pack/${server_name}_err-%d{yyyy-MM-dd}.log.zip"
+                     immediateFlush="false">
+            <PatternLayout charset="UTF-8"
+                           pattern="${sys:LOG_PATTERN}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+            <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
+            <DefaultRolloverStrategy max="30"></DefaultRolloverStrategy>
+        </RollingFile>
+    </appenders>
+    <Loggers>
+        <!-- 后期可以考虑把需要单独打印的如sql日志使用kakfa appender -->
+        <Root level="INFO">
+            <AppenderRef ref="INF"/>
+            <AppenderRef ref="ERR"/>
+        </Root>
+    </Loggers>
+</configuration>

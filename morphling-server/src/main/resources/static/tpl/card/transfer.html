@@ -1,0 +1,75 @@
+
+<!-- main header -->
+<div class="bg-light lter b-b wrapper-md">
+    <h5 class="m-n font-bold h5">充值到代理</h5>
+</div>
+
+<div class="wrapper-md" ng-controller="TransferController">
+    <div class="modal-backdrop fade in" ng-show="showLoading" style="z-index: 1040;">
+        <div class="cube1"></div>
+        <div class="cube2"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 m-t-md">
+            <div class="panel panel-default">
+                <div class="panel-heading font-bold">当前账户房卡余额：<span class="text-primary m-r-sm">{{cardLeft}}</span>张</div>
+                <div class="panel-body">
+
+                    <div class="col-lg-6">
+                        <div class="wrapper-sm" ng-show="agent">
+                            <div class="hbox h-auto">
+                                <div class="col text-center w-sm">
+                                    <div class="thumb-lg avatar inline">
+                                        <img ng-src="{{agent.headImg || 'img/a0.jpg'}}">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- fields -->
+                            <div class="text-center">
+                                <h5>代理ID：{{agent.id}}</h5>
+                                <h5>昵称：{{agent.nickname}}</h5>
+                                <h5>姓名：{{agent.realname}}</h5>
+                                <h5>手机：{{agent.tel}}</h5>
+                                <h5 style="height:1.5em;line-height: 1.5em;">剩余卡数：
+                                    <span class='text-l-t' ng-if="agent.oldCardNum">{{agent.oldCardNum}}</span>
+                                    <span class="text-success">{{agent.cardNum}}</span>
+                                </h5>
+                            </div>
+                            <!-- / fields -->
+                            <div class="text-center text-danger" ng-show="agent.id == _userinfo.agentId">您不能给自己充值！</div>
+                            <form name="chargeForm" class="form-validation" ng-show="agent.id != _userinfo.agentId">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" ng-model="num" placeholder="请输入充值的房卡数量" ui-validate=" '$value >= 1' " required>
+                                    <span class="input-group-btn ">
+                                        <button class="btn btn-default btn-dark" ng-disabled="tranfering || cardLeft==0 || chargeForm.$invalid" type="button"  ng-click="transfer()" >充值</button>
+                                    </span>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <p class="text-muted m-b-lg">注意：以下信息任意输入一项即可，将优先根据代理ID查找</p>
+                        <form name="form" class="form-validation">
+                            <div class="form-group">
+                                <label>代理ID</label>
+                                <input type="number" class="form-control" placeholder="请输入下线代理的ID，个人信息处可以查看" ng-pattern="/^[0-9]+$/" ng-model="id" >
+                            </div>
+                            <div class="form-group">
+                                <label>手机号</label>
+                                <input type="text" class="form-control" placeholder="请输入下线代理的手机号" ng-model="phone" ng-pattern="/^1[34578]\d{9}$/">
+                            </div>
+                            <button type="submit" class="btn btn-sm btn-primary m-t-md" ng-click="query()">确定</button>
+                        </form>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>

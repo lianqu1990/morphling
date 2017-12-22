@@ -1,0 +1,45 @@
+<form class="bs-example form-horizontal form-validation" name="form">
+    <div class="modal-body form-horizontal form">
+        <div class="form-body portlet light">
+            <div class="portlet-title clearfloat" style="padding-bottom:10px;border-bottom:1px solid #ececec;">
+                <div class="caption font-green-sharp" style="display:inline-block;float:left;">
+                    <i class="fa fa-plus"></i>
+                    <span class="caption-subject bold uppercase">缓存管理</span>
+                </div>
+                <div class="tools" style="float:right; cursor:pointer;">
+                    <i class="fa fa-close" ng-click="cancel()"></i>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="form-body" style="padding:15px;" ng-if="cache.params.length > 0">
+                    <div class="row">
+                        <div class="col-md-12  margin-top-15">
+                            <!-- form start -->
+                            <div class="form-group" ng-repeat="param in cache.params">
+                                <label class="col-lg-2 control-label">{{param.name}}：</label>
+                                <div class="col-lg-4">
+                                    <input type="number" ng-if="param.type == 'java.lang.Integer' || param.type == 'java.lang.Long'" class="form-control"  name="{{param.value}}" placeholder="{{param.type}}" required />
+                                    <textarea ng-if="param.type.indexOf('java.lang') < 0" class="form-control"  name="{{param.value}}" placeholder="{{param.type}}" required></textarea>
+                                    <input type="text" ng-if="param.type.indexOf('java.lang') > 0 && param.type != 'java.lang.Integer' && param.type != 'java.lang.Long'"
+                                           class="form-control"  name="{{param.value}}" placeholder="{{param.type}}" required />
+                                </div>
+                            </div>
+                            <!-- form end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" ng-if="_cacheStr">
+                <pre>{{_cacheStr}}</pre>
+            </div>
+
+            <div class="modal-footer">
+                <button class=" btn btn-primary " type="button" ng-if="cache.type != 'DELINSIDE'"  ng-click="showCache()">查看缓存</button>
+                <button class=" btn btn-primary " type="button" ng-if="cache.type != 'GETINSIDE'" ng-click="deleteCache()">删除缓存</button>
+            </div>
+
+        </div>
+    </div>
+
+</form>

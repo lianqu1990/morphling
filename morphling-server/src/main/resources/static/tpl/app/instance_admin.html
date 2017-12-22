@@ -1,0 +1,30 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm font-chinese" ng-init="
+    app.settings.asideFolded = false;
+    app.settings.asideDock = false;
+  " ng-controller="InstanceAdminController">
+    <div class="bg-light lter b-b wrapper-md font-chinese">
+        <h5 class="m-n font-bold h5">实例管理</h5>
+    </div>
+    <ui-foo-table>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row row-sm text-center">
+                    <div class="col-xs-3 col-md-2" ng-repeat="ins in instances">
+                        <div href class="block panel padder-v item" ng-class="{0:'bg-info',1:'bg-success',2:'bg-danger'}[ins.status]">
+                            <span class="text-white font-thin h5 block">{{ins.appName}}</span>
+                            <span class="text-muted text-xs">{{ins.host}}</span>
+                            <span class="bottom text-right w-full">
+                                <i ng-if="ins.status == 0" class="fa fa-upload text-muted m-r-sm"></i>
+                                <i ng-if="ins.status == 1" class="fa fa-exchange text-muted m-r-sm"></i>
+                                <i ng-if="ins.status == 2" class="fa fa-exclamation text-muted m-r-sm"></i>
+                            </span>
+                            <a class="top text-right w-full cusor-pointer btn-delete" ng-click="deleteInstance(ins.id,ins.clientName)">
+                                <i class="fa fa-times  m-r-sm"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ui-foo-table>
+</div>

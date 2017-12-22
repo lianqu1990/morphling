@@ -1,0 +1,30 @@
+<form name="dataForm1" novalidate >
+    <div class="modal-body form-horizontal form">
+        <div class="form-body portlet light">
+            <div class="portlet-title clearfloat" style="padding-bottom:10px;border-bottom:1px solid #ececec;">
+                <div class="caption font-green-sharp" style="display:inline-block;float:left;">
+                    <i class="fa fa-plus"></i>
+                    <span class="caption-subject bold uppercase">成员ID</span>
+                </div>
+                <div class="tools" style="float:right; cursor:pointer;">
+                    <i class="fa fa-close" ng-click="cancel()"></i>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <p class="m-t-sm text-danger">注意：多个用户ID之间用 "," 分割(例如输入"1,2,3,4"，用户ID为1，2，3，4的四个用户将添加到群组中)，重复添加将直接忽略</p>
+                <div class="form-body" style="padding:15px;">
+                    <div class="row">
+                        <input type="text" ng-model="userIds" name="userIds" class="form-control" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <!-- <button class="btn " ng-class="{'btn-primary':formDisabled,'btn-danger':!formDisabled}" ng-show="editData" type="button" ng-click="changeEdit()">
+            {{formDisabled?'编辑':'取消'}}
+        </button> -->
+        <button class="btn btn-primary" type="button" ng-click="ok()">确定</button>
+        <button class="btn btn-warning" type="button" ng-click="cancel()">关闭</button>
+    </div>
+</form>

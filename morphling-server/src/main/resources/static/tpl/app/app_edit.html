@@ -1,0 +1,117 @@
+<form class="bs-example form-horizontal form-validation" name="form">
+    <div class="modal-body form-horizontal form">
+        <div class="form-body portlet light">
+            <div class="portlet-title clearfloat" style="padding-bottom:10px;border-bottom:1px solid #ececec;">
+                <div class="caption font-green-sharp" style="display:inline-block;float:left;">
+                    <i class="fa fa-plus"></i>
+                    <span class="caption-subject bold uppercase">{{editData?'编辑':'创建'}}应用</span>
+                </div>
+                <div class="tools" style="float:right; cursor:pointer;">
+                    <i class="fa fa-close" ng-click="cancel()"></i>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="form-body" style="padding:15px;">
+                    <div class="row">
+                        <div class="col-md-12  margin-top-15">
+                            <!-- form start -->
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">应用名称：</label>
+                                <div class="col-lg-4">
+                                    <input  class="form-control" ng-model="app.name" placeholder="请与application名保持一致" required>
+                                </div>
+                            </div>
+                            <div class="form-group" >
+                                <label class="col-lg-2 control-label">描述：</label>
+                                <div class="col-lg-4">
+                                    <input  class="form-control" ng-model="app.description" required>
+                                </div>
+                            </div>
+                            <div class="form-group" >
+                                <label class="col-lg-2 control-label">上下文路径：</label>
+                                <div class="col-lg-4">
+                                    <input  class="form-control" placeholder="不存在请忽略" ng-model="app.contextPath" >
+                                </div>
+                            </div>
+                            <div class="form-group" >
+                                <label class="col-lg-2 control-label">端口：</label>
+                                <div class="col-lg-4">
+                                    <input  class="form-control" placeholder="" ng-model="app.port" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">应用类型：</label>
+                                <div class="col-lg-8">
+                                    <label class="radio-inline i-checks" >
+                                        <input type="radio" name="serviceType" ng-model="app.serviceType" value="1"  required>
+                                        <i></i>
+                                        网关
+                                    </label>
+                                    <label class="radio-inline i-checks" >
+                                        <input type="radio" name="serviceType" ng-model="app.serviceType" value="2"  required>
+                                        <i></i>
+                                        服务
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">部署类型：</label>
+                                <div class="col-lg-8">
+                                    <label class="radio-inline i-checks" >
+                                        <input type="radio" name="deployType" ng-model="app.deployType" value="1" checked  required>
+                                        <i></i>
+                                        Normal
+                                    </label>
+                                    <label class="radio-inline i-checks" >
+                                        <input type="radio" name="deployType" ng-model="app.deployType" value="2"  disabled required>
+                                        <i></i>
+                                        Docker
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group" >
+                                <label class="col-lg-2 control-label">git仓库地址：</label>
+                                <div class="col-lg-4">
+                                    <input  class="form-control" placeholder="git://" ng-model="app.gitUrl" required>
+                                </div>
+                            </div>
+                            <div class="form-group" >
+                                <label class="col-lg-2 control-label">git默认部署分支：</label>
+                                <div class="col-lg-4">
+                                    <input  class="form-control" placeholder="此项不填将使用默认策略，线上环境此参数无效" ng-model="app.gitBranch" >
+                                </div>
+                            </div>
+
+                            <div class="form-group" >
+                                <label class="col-lg-2 control-label">部署模块：</label>
+                                <div class="col-lg-4">
+                                    <input  class="form-control" placeholder="" ng-model="app.mvnModule" required>
+                                </div>
+                            </div>
+
+                            <hr />
+                            <div class="form-group" ng-show="!editData">
+                                <label class="col-lg-2 control-label">同步到其他环境：</label>
+                                <div class="col-lg-8">
+                                    <label class="checkbox-inline i-checks" ng-repeat="e in envs" ng-show="_userinfo.currentEnv != e.key">
+                                        <input type="checkbox" name="envs"   ng-value="e.key" checked >
+                                        <i></i>
+                                        {{e.name}}
+                                    </label>
+                                </div>
+                            </div>
+                            <!-- form end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class=" btn btn-primary " type="submit"  ng-click="submitApply()">确定</button>
+        <button class=" btn  btn-warning" type="button" ng-click="cancel()">关闭</button>
+    </div>
+
+
+
+</form>

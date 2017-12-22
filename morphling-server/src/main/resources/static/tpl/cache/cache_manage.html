@@ -1,0 +1,115 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm font-chinese" ng-init="
+    app.settings.asideFolded = false;
+    app.settings.asideDock = false;
+  " ng-controller="CacheManageController">
+    <div class="bg-light lter b-b wrapper-md font-chinese">
+        <h5 class="m-n font-bold h5">缓存管理</h5>
+    </div>
+
+
+    <div class="row wrapper-md">
+        <div class="col-md-12 " ng-init="appShow=true">
+            <div class="panel panel-default">
+                <div class="panel-heading  lt">
+                    <div class="">
+                        <span class="pull-right cusor-pointer" ng-click="appShow= !appShow"><i class="fa  text-primary-dk text-lg" ng-class="{true:'fa-caret-down',false:'fa-caret-up'}[appShow]"></i></span>
+                        <span class="font-bold ">{{app.name}}</span>
+                    </div>
+                </div>
+                <div class="panel-body  dk" ng-if="appShow">
+                    <div class="">
+                        <p class="h5  m-b-md">类型：<span class="badge bg-primary">{{{1:"网关",2:"服务"}[app.serviceType]}}</span></p>
+                        <p class="h5  m-b-md">描述：{{app.description}}</p>
+                        <p class="h5  m-b-md">端口：{{app.port}}</p>
+                        <p class="h5  m-b-md">当前安装包版本：{{app.currentPackVersion}}</p>
+                        <p class="h5  m-b-md">仓库地址：{{app.gitUrl}}</p>
+                        <p class="h5  m-b-md">创建时间：{{app.createTime}}</p>
+                        <p class="h5  m-b-md">创建人：{{app.createUsername}}</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-md-12 " >
+            <div class="row row-sm text-center">
+                <div class="col-xs-3 col-md-2" ng-repeat="ck in caches">
+                    <div href class="block padder-v item" style="border-radius: 10px" ng-class="{'REDIS':'bg-success','GETINSIDE':'bg-dark','DELINSIDE':'bg-danger'}[ck.sourceType]">
+                        <span class="text-white font-thin h5 block">{{ck.name}}</span>
+                        <span class="text-muted text-xs">{{ck.sourceType}}</span>
+                        <span class="bottom text-right w-full">
+                            <i  class="fa  fa-database text-muted m-r-sm"></i>
+                        </span>
+                        <a class="top text-right w-full cusor-pointer btn-delete" ng-click="editCache(ck)">
+                            <i class="fa fa-edit m-r-sm"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12 m-t-lg ">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form name="form" class="form-horizontal form-validation">
+                        <div class="col-md-12  margin-top-15" ng-if="dataSources.redis" >
+                            <!-- form start -->
+                            <div class="form-group" >
+                                <label class="col-lg-2 control-label">Redis数据源：</label>
+                                <div class="col-lg-4">
+                                    <label class="radio-inline i-checks" ng-repeat="(id,r) in dataSources.redis" >
+                                        <input type="radio" name="clusterId" ng-model="$parent.redis.clusterId" ng-value="id" >
+                                        <i></i>
+                                        {{r.name}}
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group" >
+                                <label class="col-lg-2 control-label">数据类型：</label>
+                                <div class="col-lg-4">
+                                    <label class="radio-inline i-checks" >
+                                        <input type="radio" name="type" ng-model="redis.type" value="string" required>
+                                        <i></i>&nbsp;string
+                                    </label>
+                                    <label class="radio-inline i-checks" >
+                                        <input type="radio" name="type" ng-model="redis.type" value="hash"  required>
+                                        <i></i>&nbsp;hash
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group" >
+                                <label class="col-lg-2 control-label">key：</label>
+                                <div class="col-lg-4">
+                                    <input type="text" class="form-control" placeholder="" ng-model="redis.key"  required/>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-if="redis.type == 'hash'">
+                                <label class="col-lg-2 control-label">hashkey：</label>
+                                <div class="col-lg-4">
+                                    <input type="text" class="form-control" placeholder="" ng-model="redis.hashkey" />
+                                </div>
+                            </div>
+                            <!-- form end -->
+                        </div>
+                    </form>
+                    <div class="col-md-12  ">
+                        <div class="col-lg-2"></div>
+                        <button class=" btn btn-primary " type="button" ng-disabled="form.$invalid"  ng-click="getRedisCache()">查看缓存</button>
+                        <button class=" btn btn-primary " type="button" ng-disabled="form.$invalid" ng-click="delRedisCache()">删除缓存</button>
+                    </div>
+
+                    <div class="col-md-12 m-t-lg" ng-if="_cacheStr">
+                        <pre class="m-t-lg">{{_cacheStr}}</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+
+
+</div>

@@ -1,0 +1,81 @@
+<form name="dataForm1" novalidate ng-submit="submitDialogForm(dataForm1.$valid)">
+    <div class="modal-body form-horizontal form">
+        <div class="form-body portlet light">
+            <div class="portlet-title clearfloat" style="padding-bottom:10px;border-bottom:1px solid #ececec;">
+                <div class="caption font-green-sharp" style="display:inline-block;float:left;">
+                    <i class="fa fa-plus"></i>
+                    <span class="caption-subject bold uppercase">{{editData?(formDisabled?'查看':'编辑'):'新增'}}角色</span>
+                </div>
+                <div class="tools" style="float:right; cursor:pointer;">
+                    <i class="fa fa-close" ng-click="cancel()"></i>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="form-body" style="padding:15px;">
+                    <div class="row">
+                        <div class="col-md-12  margin-top-15">
+
+                            <div class="form-group" ng-class="{ 'has-error' : dataForm1.nameZh.$invalid && submited }">
+                                <label class="col-md-3 control-label">
+                                    角色名(中文)
+                                </label>
+                                <div class="col-md-9">
+                                    <div class="input-group">
+                                        <input type="text" ng-model="data.partyName" name="partyName" db-validator="required" ng-maxlength="100" class="form-control" placeholder="角色名(中文)" ng-disabled="formDisabled"/>
+                                        <span class="help-block" ng-show="dataForm1.nameZh.$invalid && submited ">{{$dbForm.nameZh.msg}}</span>
+                                        <!--<span class="help-block" ng-show="dataForm1.nameZh.$error.unique">角色名必须唯一</span>-->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-class="{ 'has-error' : dataForm1.nameEn.$invalid && submited }">
+                                <label class="col-md-3 control-label">
+                                    角色名(英文)
+                                </label>
+                                <div class="col-md-9">
+                                    <div class="input-group">
+                                        <input type="text" ng-model="data.partyNo" db-validator="required" name="partyNo" ng-maxlength="100" class="form-control" placeholder="角色名(英文)"  ng-disabled="formDisabled"/>
+                                        <span class="help-block" ng-show="dataForm1.nameEn.$invalid && submited ">{{$dbForm.nameEn.msg}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-class="{ 'has-error' : dataForm1.description.$invalid && submited }">
+                                <label class="col-md-3 control-label">
+                                    描述
+                                </label>
+                                <div class="col-md-9">
+                                    <div class="input-group">
+                                        <input type="text" ng-model="data.organizationName" db-validator="required" name="organizationName" class="form-control" placeholder="描述" ng-maxlength="255"  ng-disabled="formDisabled"/>
+                                        <span class="help-block" ng-show="dataForm1.description.$invalid && submited ">{{$dbForm.description.msg}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">
+                                    可编辑
+                                </label>
+                                <div class="col-md-9 control-label">
+                                    <div class="input-group">
+                                        <div class="checker">
+                                           <label class="i-checks m-b-none">
+                                              <input type="checkbox" ng-model="data.departmentName" name="checked"><i></i>
+                                           </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <!-- <button class="btn " ng-class="{'btn-primary':formDisabled,'btn-danger':!formDisabled}" ng-show="editData" type="button" ng-click="changeEdit()">
+            {{formDisabled?'编辑':'取消'}}
+        </button> -->
+        <button class="btn btn-primary" type="submit" ng-show="!editData||!formDisabled">确定</button>
+        <button class="btn btn-warning" type="button" ng-click="cancel()">关闭</button>
+    </div>
+</form>

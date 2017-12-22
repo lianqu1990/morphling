@@ -1,0 +1,117 @@
+/*清除浮动代码*/ 
+.clearfloat:after{display:block;clear:both;content:"";visibility:hidden;height:0} 
+.clearfloat{zoom:1} 
+
+
+/*表格排序CSS*/
+.headerName{
+    width: 90%;
+    text-align: center;
+}
+.sorting{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    position: relative;
+    top: 4px;
+    /*left: 10px;*/
+}
+.sorting_asc {
+
+    background: url('../img/sort_asc.png') no-repeat center center;
+}
+.sorting_both {
+
+    background: url('../img/sort_both.png') no-repeat center center;
+}
+.sorting_desc {
+    background: url('../img/sort_desc.png') no-repeat center center;
+}
+
+
+/*样式冲突*/
+.table-bordered > thead > tr > th{
+	border-color:#ddd !important;
+}
+
+
+/*loading框*/
+.cube1, .cube2 {
+  background-color: #7266BA;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  margin-left: -10px;
+   
+  -webkit-animation: cubemove 1.8s infinite ease-in-out;
+  animation: cubemove 1.8s infinite ease-in-out;
+}
+ 
+.cube2 {
+  -webkit-animation-delay: -0.9s;
+  animation-delay: -0.9s;
+}
+ 
+@-webkit-keyframes cubemove {
+  25% { -webkit-transform: translateX(42px) rotate(-90deg) scale(0.5) }
+  50% { -webkit-transform: translateX(42px) translateY(42px) rotate(-180deg) }
+  75% { -webkit-transform: translateX(0px) translateY(42px) rotate(-270deg) scale(0.5) }
+  100% { -webkit-transform: rotate(-360deg) }
+}
+ 
+@keyframes cubemove {
+  25% {
+    transform: translateX(42px) rotate(-90deg) scale(0.5);
+    -webkit-transform: translateX(42px) rotate(-90deg) scale(0.5);
+  } 50% {
+    transform: translateX(42px) translateY(42px) rotate(-179deg);
+    -webkit-transform: translateX(42px) translateY(42px) rotate(-179deg);
+  } 50.1% {
+    transform: translateX(42px) translateY(42px) rotate(-180deg);
+    -webkit-transform: translateX(42px) translateY(42px) rotate(-180deg);
+  } 75% {
+    transform: translateX(0px) translateY(42px) rotate(-270deg) scale(0.5);
+    -webkit-transform: translateX(0px) translateY(42px) rotate(-270deg) scale(0.5);
+  } 100% {
+    transform: rotate(-360deg);
+    -webkit-transform: rotate(-360deg);
+  }
+}
+
+
+
+/*grid样式*/
+.linka{
+  color:goldenrod !important;
+}
+
+.linka:hover{
+  text-decoration: underline;
+}
+a.refresh-btn {
+    color: #2b542c;
+}
+a.refresh-btn:hover,
+a.refresh-btn:focus{
+    color: #1e983b;
+}
+
+.btn-delete {
+    color: #FFFFFF;
+    opacity:0.3
+}
+a.btn-delete:hover{
+    color:#030303;
+    opacity:1;
+}
+a.btn-delete:focus{
+    color:#030303;
+    opacity:1;
+}
+
+
+
+
+
