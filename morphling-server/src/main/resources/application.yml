@@ -25,7 +25,7 @@ spring:
     show-sql: false
     properties:
       hibernate:
-        dialect: com.huatu.morphling.dao.jpa.core.CustomDialect
+        dialect: com.lianqu1990.morphling.dao.jpa.core.CustomDialect
 
   jackson:
     serialization:
@@ -46,9 +46,9 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.100.20:3306/morphling?characterEncoding=UTF-8&transformedBitIsBoolean=true&tinyInt1isBit=false&autoReconnect=true&useUnicode=true&characterEncoding=utf-8&autoReconnectForPools=true&failOverReadOnly=false&connectTimeout=5000&useSSL=false
+    url: jdbc:mysql://192.168.1.101:3306/morphling?characterEncoding=UTF-8&transformedBitIsBoolean=true&tinyInt1isBit=false&autoReconnect=true&useUnicode=true&characterEncoding=utf-8&autoReconnectForPools=true&failOverReadOnly=false&connectTimeout=5000&useSSL=false
     username: root
-    password: vhuatu#115@116
+    password: mysql
     druid:
       initialSize: 10
       minIdle: 10

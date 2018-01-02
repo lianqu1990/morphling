@@ -23,11 +23,5 @@
         <Logger name="druid.sql.Statement" level="DEBUG" additivity="false" includeLocation="true">
             <AppenderRef ref="Console"/>
         </Logger>
-        <Logger name="com.huatu.tiku" level="DEBUG" additivity="false" includeLocation="true">
-            <AppenderRef ref="Console"/>
-        </Logger>
-        <Logger name="com.huatu.tiku.course.netschool.api" level="DEBUG" additivity="false" includeLocation="true">
-            <AppenderRef ref="Console"/>
-        </Logger>
     </Loggers>
 </configuration>

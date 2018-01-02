@@ -110,6 +110,16 @@ angular.module('app')
                                 }]
                         }
                     })
+                    .state('app.endpoints', {
+                        url: '/endpoints/:appId',
+                        templateUrl: 'tpl/endpoints/endpoints_view.html',
+                        resolve: {
+                            deps: ['$ocLazyLoad',
+                                function ($ocLazyLoad) {
+                                    return $ocLazyLoad.load(['js/controllers/endpoints.js','js/services/application.js']);
+                                }]
+                        }
+                    })
                     .state('app.degrade', {
                         url: '/degrade/:appId',
                         templateUrl: 'tpl/degrade/degrade_manage.html',

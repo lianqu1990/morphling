@@ -4,12 +4,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>morphling</artifactId>
-        <groupId>com.huatu</groupId>
+        <groupId>com.lianqu1990</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.huatu</groupId>
     <artifactId>morphling-server</artifactId>
 
     <properties>
@@ -53,14 +52,13 @@
         </dependency>
 
         <dependency>
-            <groupId>com.huatu</groupId>
+            <groupId>com.lianqu1990</groupId>
             <artifactId>morphling-common</artifactId>
             <version>${default.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.huatu</groupId>
-            <artifactId>morphling-utils</artifactId>
-            <version>${default.version}</version>
+            <groupId>com.lianqu1990.commons</groupId>
+            <artifactId>common-utils</artifactId>
         </dependency>
 
         <!--数据库-->
@@ -85,19 +83,19 @@
 
 
         <dependency>
-            <groupId>com.huatu.springboot</groupId>
+            <groupId>com.lianqu1990.springboot</groupId>
             <artifactId>spring-boot-starter-web-tools</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.huatu.springboot</groupId>
+            <groupId>com.lianqu1990.springboot</groupId>
             <artifactId>spring-boot-starter-executor</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.huatu.springboot</groupId>
+            <groupId>com.lianqu1990.springboot</groupId>
             <artifactId>spring-boot-starter-druid</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.huatu.springboot</groupId>
+            <groupId>com.lianqu1990.springboot</groupId>
             <artifactId>spring-boot-starter-restclient</artifactId>
         </dependency>
 

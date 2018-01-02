@@ -4,12 +4,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>morphling</artifactId>
-        <groupId>com.huatu</groupId>
+        <groupId>com.lianqu1990</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.huatu</groupId>
     <artifactId>morphling-agent</artifactId>
 
     <properties>
@@ -48,7 +47,7 @@
         </dependency>
 
         <dependency>
-            <groupId>com.huatu</groupId>
+            <groupId>com.lianqu1990</groupId>
             <artifactId>morphling-common</artifactId>
             <version>${default.version}</version>
         </dependency>

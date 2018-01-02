@@ -35,8 +35,5 @@
             <AppenderRef ref="INF"/>
             <AppenderRef ref="ERR"/>
         </Root>
-        <Logger name="com.huatu.tiku" level="DEBUG" additivity="false" includeLocation="true">
-            <AppenderRef ref="INF"/>
-        </Logger>
     </Loggers>
 </configuration>

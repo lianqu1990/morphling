@@ -1,0 +1,80 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm font-chinese" ng-init="
+    app.settings.asideFolded = false;
+    app.settings.asideDock = false;
+  " ng-controller="EndpointsController">
+    <div class="bg-light lter b-b wrapper-md font-chinese">
+        端点监控
+    </div>
+    <ui-foo-table>
+        <div class="row">
+            <div class="col-md-12 ">
+                <div class="panel panel-default" ng-init="appShow=true">
+                    <div class="panel-heading  lt">
+                        <div class="">
+                            <span class="pull-right cusor-pointer" ng-click="appShow= !appShow"><i class="fa  text-primary-dk text-lg" ng-class="{true:'fa-caret-down',false:'fa-caret-up'}[appShow]"></i></span>
+                            <span class="font-bold ">{{app.name}}</span>
+                        </div>
+                    </div>
+                    <div class="panel-body  dk">
+                        <div class="">
+                            <p class="h5  m-b-md">类型：<span class="badge bg-primary">{{{1:"网关",2:"服务"}[app.serviceType]}}</span></p>
+                            <p class="h5  m-b-md">描述：{{app.description}}</p>
+                            <p class="h5  m-b-md">端口：{{app.port}}</p>
+                            <p class="h5  m-b-md">当前安装包版本：{{app.currentPackVersion}}</p>
+                            <p class="h5  m-b-md">仓库地址：{{app.gitUrl}}</p>
+                            <p class="h5  m-b-md">创建时间：{{app.createTime}}</p>
+                            <p class="h5  m-b-md">创建人：{{app.createUsername}}</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row row-sm text-center" ng-if="instance">
+            <div class="col-xs-3 col-md-2" >
+                <div href class="block panel padder-v bg-info item cusor-pointer" ng-click="simpleShow('info')">
+                    <span class="text-white font-thin h4 block">info</span>
+                    <span class="bottom text-right w-full"><i class="fa  fa-info-circle text-muted m-r-sm"></i></span>
+                </div>
+            </div>
+            <div class="col-xs-3 col-md-2">
+                <div href class="block panel padder-v bg-success item cusor-pointer" ng-click="simpleShow('env')">
+                    <span class="text-white font-thin h4 block">env</span>
+                    <span class="bottom text-right w-full"><i class="fa fa-leaf text-muted m-r-sm"></i></span>
+                </div>
+            </div>
+            <div class="col-xs-3 col-md-2">
+                <div href class="block panel padder-v bg-dark item cusor-pointer" ng-click="simpleShow('beans')">
+                    <span class="text-white font-thin h4 block">spring beans</span>
+                    <span class="bottom text-right w-full"><i class="fa fa-tencent-weibo text-muted m-r-sm"></i></span>
+                </div>
+            </div>
+            <div class="col-xs-3 col-md-2">
+                <div href class="block panel padder-v bg-primary item cusor-pointer" ng-click="simpleShow('metrics')">
+                    <span class="text-white font-thin h4 block">metrics</span>
+                    <span class="bottom text-right w-full"><i class="fa fa-tencent-weibo text-muted m-r-sm"></i></span>
+                </div>
+            </div>
+            <div class="col-xs-3 col-md-2">
+                <div href class="block panel padder-v bg-warning item cusor-pointer" ng-click="simpleShow('executor')">
+                    <span class="text-white font-thin h4 block">executor</span>
+                    <span class="bottom text-right w-full"><i class="fa fa-bar-chart-o text-muted m-r-sm"></i></span>
+                </div>
+            </div>
+            <div class="col-xs-3 col-md-2">
+                <div href class="block panel padder-v bg-danger item cusor-pointer" ng-click="simpleShow('mappings')">
+                    <span class="text-white font-thin h4 block">mappins</span>
+                    <span class="bottom text-right w-full"><i class="fa fa-bar-chart-o text-muted m-r-sm"></i></span>
+                </div>
+            </div>
+        </div>
+
+    </ui-foo-table>
+
+    <div class="modal-backdrop fade in" ng-show="loading" style="z-index: 1040;">
+        <div class="cube1"></div>
+        <div class="cube2"></div>
+    </div>
+</div>
