@@ -18,9 +18,10 @@
         <module>spring-boot-starter-druid</module>
         <module>spring-boot-starter-restclient</module>
         <module>spring-boot-starter-executor</module>
-        <module>spring-boot-starter-web-register</module>
         <module>spring-boot-starter-web-tools</module>
-        <module>spring-boot-starter-cache-manage</module>
-        <module>spring-boot-starter-degrade</module>
+        <!--底下的几个组件是我自己对于缓存管理降级和服务注册的简单管理方式-->
+        <!--<module>spring-boot-starter-web-register</module>-->
+        <!--<module>spring-boot-starter-cache-manage</module>-->
+        <!--<module>spring-boot-starter-degrade</module>-->
     </modules>
 </project>

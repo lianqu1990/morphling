@@ -4,10 +4,8 @@ import com.google.common.collect.SetMultimap;
 import com.lianqu1990.morphling.common.consts.WebParamConsts;
 import com.lianqu1990.morphling.service.local.MenuService;
 import com.lianqu1990.morphling.spring.security.CaptchaFilter;
-import com.lianqu1990.morphling.spring.security.CustomDaoAuthenticationProvider;
 import com.lianqu1990.morphling.spring.security.UserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -17,8 +15,6 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.rememberme.InMemoryTokenRepositoryImpl;
 
@@ -111,17 +107,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         }
     }
 
-
-    @Bean
-    public PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
-    }
-
-
-    @Bean
-    public CustomDaoAuthenticationProvider authenticationProvider(@Autowired UserDetailsService userDetailService){
-        CustomDaoAuthenticationProvider authenticationProvider = new CustomDaoAuthenticationProvider(userDetailService);
-        return authenticationProvider;
-    }
 
 }

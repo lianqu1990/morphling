@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="INFO" monitorInterval="60">
+    <Properties>
+        <Property name="LOG_EXCEPTION_CONVERSION_WORD">%xwEx</Property>
+        <Property name="LOG_LEVEL_PATTERN">%5p</Property>
+        <Property name="LOG_PATTERN">%d{yyyy-MM-dd HH:mm:ss} %clr{${LOG_LEVEL_PATTERN}} %clr{[%15.15t]}{blue} %clr{%C.%M(%L)}{cyan} --> %m%n${sys:LOG_EXCEPTION_CONVERSION_WORD}</Property>
+    </Properties>
+    <!-- -->
+    <appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout charset="UTF-8" pattern="${sys:LOG_PATTERN}" />
+        </Console>
+    </appenders>
+    <Loggers>
+        <!-- 后期可以考虑把需要单独打印的如sql日志使用kakfa appender -->
+        <!--<Root level="DEBUG">-->
+        <Root level="INFO">
+            <AppenderRef ref="Console"/>
+        </Root>
+        <Logger name="org.springframework.amqp" level="INFO" additivity="false" includeLocation="true">
+            <AppenderRef ref="Console"/>
+        </Logger>
+        <Logger name="com.huatu.tiku" level="DEBUG" additivity="false" includeLocation="true">
+            <AppenderRef ref="Console"/>
+        </Logger>
+        <Logger name="com.huatu.tiku.course.netschool.api" level="DEBUG" additivity="false" includeLocation="true">
+            <AppenderRef ref="Console"/>
+        </Logger>
+    </Loggers>
+</configuration>

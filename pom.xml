@@ -9,6 +9,7 @@
         <module>morphling-common</module>
         <module>morphling-agent</module>
         <module>morphling-server</module>
+        <module>morphling-demo-app</module>
     </modules>
     <groupId>com.lianqu1990</groupId>
     <artifactId>morphling</artifactId>

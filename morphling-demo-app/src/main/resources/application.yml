@@ -1,0 +1,83 @@
+# 通用配置（这些配置是没有必要放到apollo去的固定配置[或者增加可读性的配置]，如果容易变动的配置，最好放到apollo里进行配置）
+server:
+  port: 12121
+  context-path: /demo
+  compression:
+      enabled: true
+      mime-types: application/json,application/xml,text/html,text/xml,text/plain
+      min-response-size: 2048
+  undertow:
+    io-threads: 2
+    worker-threads: 48
+    buffer-size: 1024
+
+spring:
+  application:
+    name: "${server_name}"
+  profiles:
+    active: ${project.environment}
+
+  http:
+    encoding:
+      charset: UTF-8
+      force: true
+
+  jackson:
+    serialization:
+      write_dates_as_timestamps: false
+      fail_on_empty_beans: false
+    deserialization:
+      fail_on_unknown_properties: false
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    default-property-inclusion: non_null
+
+  mvc:
+    throw-exception-if-no-handler-found: true
+
+  output:
+    ansi:
+      enabled: always
+
+logging:
+  config: "classpath:config/log4j2-${spring.profiles.active}.xml"
+
+## 监控
+info:
+  app:
+    name: "${server_name}"
+    encoding: UTF-8
+
+
+endpoints:
+  actuator:
+    enabled: true
+  jmx:
+    enabled: false
+management:
+  info.git.mode: full
+  security:
+    enabled: false
+  context-path: /_monitor
+  add-application-context-header: false
+
+
+htonline:
+  wrapper.enabled: true
+
+
+# 不同环境的不同配置，也可以放在apollo，除了开发使用的特殊debug等配置，一般不建议放在这里
+---
+spring:
+  profiles: dev
+debug: true
+---
+spring:
+  profiles: test
+---
+spring:
+  profiles: release
+---
+spring:
+  profiles: product
+

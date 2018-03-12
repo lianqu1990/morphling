@@ -7,7 +7,7 @@
 ```java
 
     @Cached(name = "课程列表v3",
-            key = "T(com.lianqu1990..tiku.course.util.CourseCacheKey).courseListV3(T(com.lianqu1990..common.utils.web.RequestUtil).getParamSign(#map))",
+            key = "T(com.lianqu1990.tiku.course.util.CourseCacheKey).courseListV3(T(com.lianqu1990.common.utils.web.RequestUtil).getParamSign(#map))",
             params = {@Cached.Param(name="查询参数",value = "map",type = Map.class)})
     @Async
     public ListenableFuture<CourseListV3DTO> getCourseListV3(Map<String,Object> params){
